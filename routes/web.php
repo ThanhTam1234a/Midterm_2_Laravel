@@ -43,6 +43,10 @@ Route::get('/type/{id}',[PageController::class,'getLoaiSp']);
 
 Route::get('/detail/{id}',[PageController::class,'getDetail']);
 
+Route::get('add-to-cart/{id}', [PageController::class, 'getAddToCart'])->name('themgiohang');								
+Route::get('del-cart/{id}', [PageController::class, 'getDelItemCart'])->name('xoagiohang');								
+                                
+                                
 
 
 

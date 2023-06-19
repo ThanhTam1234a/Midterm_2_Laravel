@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Cart;
 use App\Models\bill_details;
 use App\Models\comments;
 use App\Models\products;
@@ -9,6 +9,7 @@ use App\Models\slide;
 use App\Models\slides;
 use App\Models\type_products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PageController extends Controller
 {
@@ -102,5 +103,16 @@ public function  postAdminDelete($id)
     $product->delete();
     return $this->getIndexAdmin();
 }
+
+						
+public function getAddToCart(Request $req, $id){					
+    $product = products::find($id);					
+    $oldCart = Session('cart')?Session::get('cart'):null;					
+    $cart = new Cart($oldCart);					
+    $cart->add($product,$id);					
+    $req->session()->put('cart', $cart);					
+    return redirect()->back();					
+}					
+                
 
 }
